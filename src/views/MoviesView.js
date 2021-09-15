@@ -26,13 +26,14 @@ class MoviesView extends Component {
 
     render(){
         const {query, movies} = this.state;
+        const {location} = this.props;
         const shouldRender = movies.length > 0;
         return(
             <>
                 <input  type="text"  value={query} onChange={this.handlerChanged}/>
                 <button type="submit"  onClick={this.sendQuery}>Search</button>
                 <ul>
-                    {shouldRender  && movies.map(movie=>(<li key={movie.id}> <Link to={`${this.props.match.url}/${movie.id}`}>{movie.original_title || movie.name}</Link></li>))}
+                    {shouldRender  && movies.map(({id, name, original_title})=>(<li key={id}> <Link to={{pathname:`${this.props.match.url}/${id}`,state:{from: location} }}>{original_title || name}</Link></li>))}
                 </ul>
 
             </>    

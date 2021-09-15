@@ -1,8 +1,9 @@
 import './App.css';
-import {Route, NavLink, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import HomeView from './views/HomeView';
 import MoviesView from './views/MoviesView';
 import MovieDetailsPage from './views/MovieDetailsPage';
+import AppBar from './components/AppBar';
 
 
 
@@ -10,10 +11,7 @@ import MovieDetailsPage from './views/MovieDetailsPage';
 function App() {
   return (
     <>
-      <ul>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/movies">Movies</NavLink></li>
-      </ul>
+      <AppBar />
       <Switch>
         <Route exact path ='/' component={HomeView}></Route>
         <Route  path ='/movies/:movieId' component={MovieDetailsPage}></Route>
