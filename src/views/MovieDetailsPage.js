@@ -5,7 +5,7 @@ import Axios from 'axios';
 import key from '../key';
 import Cast from '../components/Cast';
 import Reviews from '../components/Reviews';
-import bootstrap from 'bootstrap';
+
 
 
 
@@ -35,23 +35,28 @@ class MovieDetailsPage extends Component {
         const {title, overview, genres, poster_path, vote_average} = this.state;
         const imageUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
         const {match} = this.props;
-        console.log(bootstrap);
 
         return(
             <>
-                <button tupe="button" onClick={this.handlGoBack}>Go back</button>
-                <div>
-                    {poster_path && <img src={imageUrl} alt={title}/>}
-                    <h1>{title}</h1>
-                    <h2>Overview</h2>
-                    <h2> User Score {vote_average*10}%</h2>
-                    <p>{overview}</p>
-                    <h3>Genres</h3>
-                    <ul>
-                        { genres.length > 0 && genres.map(({id, name})=>(<li key ={id}>{name}</li>))}
-                    </ul>
-                    <p>Additional information</p>
-                    <ul>
+                <button tupe="button" onClick={this.handlGoBack} className="btn btn-success">Go back</button>
+                <div className="row mt-3 mb-3">
+                    <div className="col-3">
+                        {poster_path && <img src={imageUrl} alt={title} className="img-fluid"/>}
+                    </div>
+                    <div className="col-6 p-3">
+                        <h3>{title}</h3>
+                        <p> User Score {vote_average*10}%</p>
+                        <h4>Overview</h4>
+                        <p>{overview}</p>
+                        <h5>Genres</h5>
+                        <ul className="row normolize-li">
+                            { genres.length > 0 && genres.map(({id, name})=>(<li key ={id} className="col-3">{name}</li>))}
+                        </ul>
+                    </div>
+                </div>
+                <div className="col-6 ">
+                    <h2>Additional information</h2>
+                    <ul className="">
                         <li><NavLink to={`${match.url}/cast`}>Cast</NavLink></li>
                         <li><NavLink to={`${match.url}/reviews`}>Reviews</NavLink></li>
                     </ul>

@@ -22,9 +22,12 @@ class HomeView extends Component {
         const shouldRender = movies.length > 0;
         return(
             <>
-                <h1>Trending today</h1>
-                <ul>
-                    {shouldRender && movies.map(movie=>(<li key={movie.id}> <Link to={{pathname: `/movies/${movie.id}`, state:{from: location}}}>{movie.original_title || movie.name}</Link></li>))}
+                <h1 className="home--title p-3" >Trending today</h1>
+                <ul className="list-group">
+                    {shouldRender && movies.map(({id, original_title,name })=>(
+                        <li key={id} className="list-group-item">
+                            <Link to={{pathname: `/movies/${id}`, state:{from: location}}}>{original_title || name}</Link>
+                        </li>))}
                 </ul>
             </>    
         )

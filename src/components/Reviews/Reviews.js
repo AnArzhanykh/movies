@@ -21,8 +21,14 @@ class Reviews extends Component {
         const {results, noComment } = this.state;
         return(
             <>
-                <ul>
-                    {  results.length ?  results.map(({author, content, id})=>(<li key={id}><h2>{author}</h2><p>{content}</p></li>)): noComment}
+                <ul className="col-6 ">
+                    {  results.length ?  results.map(({author, content, id})=>(<li key={id} className="card mb-3">
+                        <div className="card-body">
+                            <h2 className="card-title">{author}</h2>
+                            <p className="card-text">{content}</p>
+                         </div>   
+                        </li>)):
+                    noComment}
                 </ul>
             </>
         )

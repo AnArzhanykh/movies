@@ -21,13 +21,16 @@ class Cast extends Component {
         const {cast, defaultImage} = this.state;
         return(
             <>
-                <ul>
-                   {cast.map(({id, name,character, profile_path})=>(<li key={id}>
-                        <div>
-                            <img src={ profile_path=== null ? defaultImage : `https://image.tmdb.org/t/p/w500${profile_path}`} alt={name}/>
+                <ul className="list-group">
+                   {cast.map(({id, name,character, profile_path})=>(<li key={id} className="card col-2 list-group-item mb-3 item--background">
+                        <div >
+                            <img src={ profile_path=== null ? defaultImage : `https://image.tmdb.org/t/p/w500${profile_path}`} alt={name} className="card-img-top "/>
                         </div>
-                        <div>{name}</div>
-                        <div>{character}</div>
+                        <div className="card-body">
+                            <div className="card-text">{name}</div>
+                            <div className="card-text">Character: {character}</div>
+                        </div>
+                       
                    </li>))}  
                 </ul>
             </>
