@@ -5,6 +5,7 @@ import Axios from 'axios';
 import key from '../key';
 import Cast from '../components/Cast';
 import Reviews from '../components/Reviews';
+import bootstrap from 'bootstrap';
 
 
 
@@ -34,6 +35,7 @@ class MovieDetailsPage extends Component {
         const {title, overview, genres, poster_path, vote_average} = this.state;
         const imageUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
         const {match} = this.props;
+        console.log(bootstrap);
 
         return(
             <>
