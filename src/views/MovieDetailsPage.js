@@ -5,6 +5,7 @@ import Axios from 'axios';
 import key from '../key';
 import Cast from '../components/Cast';
 import Reviews from '../components/Reviews';
+import PropTypes from 'prop-types';
 
 
 
@@ -35,7 +36,6 @@ class MovieDetailsPage extends Component {
         const {title, overview, genres, poster_path, vote_average} = this.state;
         const imageUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
         const {match} = this.props;
-
         return(
             <>
                 <button tupe="button" onClick={this.handlGoBack} className="btn btn-success">Go back</button>
@@ -67,6 +67,27 @@ class MovieDetailsPage extends Component {
             </>
         )
     }
+}
+
+MovieDetailsPage.propTypes  = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }),
+    location: PropTypes.shape({
+        hash: PropTypes.string.isRequired,
+        pathname: PropTypes.string,
+        search: PropTypes.string,
+        state: PropTypes.shape({
+            from: PropTypes.shape({
+                key: PropTypes.string.isRequired,
+                pathname: PropTypes.string.isRequired,
+            })
+        })
+    }),
+    match: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired,
+    }),
 }
 
 export default MovieDetailsPage;

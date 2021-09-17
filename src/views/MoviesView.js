@@ -2,7 +2,8 @@
 import {Component} from 'react';
 import Axios from 'axios';
 import key from '../key';
-import MoviesList from '../components/MoviesList'
+import MoviesList from '../components/MoviesList';
+import PropTypes from 'prop-types';
 
 
 class MoviesView extends Component {
@@ -30,7 +31,7 @@ class MoviesView extends Component {
 
 
     render(){
-        const {query, movies, movieNotFind, emptyString} = this.state;
+        const {query, movies, movieNotFind} = this.state;
         const {location} = this.props;
         const shouldRender = movies.length > 0;
         return(
@@ -45,6 +46,14 @@ class MoviesView extends Component {
             </> 
         )
     }
+}
+
+MoviesView.propTypes  = {
+    location: PropTypes.shape({
+        hash: PropTypes.string.isRequired,
+        pathname: PropTypes.string,
+        search: PropTypes.string,
+  }),   
 }
 
 export default MoviesView;

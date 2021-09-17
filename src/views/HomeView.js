@@ -1,8 +1,8 @@
 import {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
 import Axios from 'axios';
 import key from '../key';
-import MoviesList from '../components/MoviesList'
+import MoviesList from '../components/MoviesList';
+import PropTypes from 'prop-types';
 
 
 
@@ -16,6 +16,7 @@ class HomeView extends Component {
         const response = await Axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${key}`)
         this.setState({movies:response.data.results})
     }
+    
 
     render(){
         const {movies} = this.state;
@@ -28,6 +29,14 @@ class HomeView extends Component {
             </>    
         )
     }
+}
+
+HomeView.propTypes  = {
+    location: PropTypes.shape({
+        hash: PropTypes.string.isRequired,
+        pathname: PropTypes.string,
+        search: PropTypes.string,
+  }),   
 }
 
 export default HomeView;

@@ -19,6 +19,7 @@ class Cast extends Component {
 
     render(){
         const {cast, defaultImage} = this.state;
+        console.log(this.props);
         return(
             <>
                 <ul className="list-group">
