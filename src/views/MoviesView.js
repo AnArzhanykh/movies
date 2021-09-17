@@ -1,8 +1,8 @@
 
 import {Component} from 'react';
-import {Link} from 'react-router-dom'
 import Axios from 'axios';
 import key from '../key';
+import MoviesList from '../components/MoviesList'
 
 
 class MoviesView extends Component {
@@ -10,6 +10,7 @@ class MoviesView extends Component {
     state={
         query: '',
         movies: [],
+        movieNotFind: false,
     }
 
 
@@ -19,13 +20,17 @@ class MoviesView extends Component {
 
     sendQuery = async (e)=>{
         e.preventDefault();
+        if(!this.state.query){
+            return
+        }
         const response = await Axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${this.state.query}&page=1&include_adult=false`);
         this.setState({movies:response.data.results})
-        this.setState({query: ''})
+        this.setState({query: '', movieNotFind: true})
     }
 
+
     render(){
-        const {query, movies} = this.state;
+        const {query, movies, movieNotFind, emptyString} = this.state;
         const {location} = this.props;
         const shouldRender = movies.length > 0;
         return(
@@ -33,14 +38,10 @@ class MoviesView extends Component {
                 <form className="d-flex col-6">
                     <input  type="text"  value={query} onChange={this.handlerChanged} className="form-control me-2"/>
                     <button type="submit"  onClick={this.sendQuery} className="btn btn-outline-success">Search</button>
+                    
                 </form>
-
-                <ul className="list-group">
-                    {shouldRender  && movies.map(({id, name, original_title})=>(
-                        <li key={id} className="list-group-item">
-                            <Link to={{pathname:`${this.props.match.url}/${id}`,state:{from: location} }}>{original_title || name}</Link>
-                        </li>))}
-                </ul>
+                {movieNotFind && !shouldRender &&  <h2> По вашему запросу нечего не найдено</h2>}
+                {shouldRender  && <MoviesList movies={movies} location={location} /> }
             </> 
         )
     }
